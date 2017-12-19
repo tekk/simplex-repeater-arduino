@@ -1,11 +1,17 @@
 /*
-  Simplex Repeater on Arduino Mega using cheap 120s recording and playback module
+  Simplex Repeater on Arduino Mega using cheap 120s recording
+  and playback module.
+
   Please compile and run under PlatformIO IDE
+
   Licese: MIT
   Author: Peter Javorsky, MSc.
   E-mail: tekk.sk (at) gmail.com
-  Video: https://youtu.be/nC-FqFgFxdM
-  Github: https://github.com/tekk/simplex-repeater-arduino
+  Github: @tekk
+
+  Source: https://github.com/tekk/simplex-repeater-arduino
+
+  Based on libraries made by Adafruit.
 */
 
 #include <Arduino.h>
@@ -21,6 +27,8 @@
 // 5 - LCD reset (RST)
 Adafruit_PCD8544 display = Adafruit_PCD8544(13, 11, 12, 10, 9);
 
+// Our club website: http://integrac.sk
+const char* titleCaption = "INTEGRAC";
 // constants
 const unsigned char CONTRAST = 50;
 // pins definitions
@@ -113,7 +121,7 @@ void setup()   {
 
   for (int i = 0; i < 10; i++) {
     display.setCursor(0, i * 8);
-    display.println("INTEGRAC");
+    display.println(titleCaption);
     display.display(); // show splashscreen
     delay(10);
   }
@@ -150,6 +158,25 @@ void updateUI() {
   }
 
   display.display();
+}
+
+void logState() {
+  Serial.print("RX:");
+  Serial.print(isRx());
+  Serial.print(" TX:");
+  Serial.println(isTx());
+
+  if (recording) {
+    Serial.print("Recording: ");
+    Serial.print(recordedMillis / 1000.0);
+    Serial.println(" s");
+  }
+
+  if (playing) {
+    Serial.print("Playing: ");
+    Serial.print(playedMillis / 1000.0);
+    Serial.println(" s");
+  }
 }
 
 void transmitRecording() {
