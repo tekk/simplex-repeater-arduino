@@ -1,3 +1,13 @@
+/*
+  Simplex Repeater on Arduino Mega using cheap 120s recording and playback module
+  Please compile and run under PlatformIO IDE
+  Licese: MIT
+  Author: Peter Javorsky, MSc.
+  E-mail: tekk.sk (at) gmail.com
+  Video: https://youtu.be/nC-FqFgFxdM
+  Github: https://github.com/tekk/simplex-repeater-arduino
+*/
+
 #include <Arduino.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
